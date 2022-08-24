@@ -51,8 +51,8 @@
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
                 {
-                  "html": "./src/electron/index.html",
-                  "js": "./src/electron/renderer.ts",
+                  "html": "./src/nodejsthread/index.html",
+                  "js": "./src/nodejsthread/renderer.ts",
                   "name": "main_window"
                 }
               ]

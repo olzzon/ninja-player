@@ -16,12 +16,13 @@ console.log('Stored Setting: ', settings)
 
 const App = () => {
     return (
-        <div>
+        <div className="app">
             <h1>NINJA - PLAYER
             </h1>
-            <a href={url}>Connect to WebRTC server</a>
-            <p>Connect with this URL: {url}</p>
+            <a href={url} className="webrtc-connect">Connect to WebRTC server</a>
+            <hr/>
             <SettingsForm />
+            <p>LOG: Connection URL {url}</p>
         </div>
     );
 }

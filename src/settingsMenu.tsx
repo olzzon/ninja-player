@@ -3,18 +3,36 @@ import { ISettings } from "./model/types";
 import { loadSettings, saveSettings } from "./utils/storage";
 import './style/settings.css'
 
-// let settings: ISettings = loadSettings();
-let settings: ISettings = undefined;
+let settings: ISettings = loadSettings();
+
 if (!settings) {
   settings = {
     webPage: "https://webrtc.olzzon.dk/tv2.html",
-    room: "TV2adhoc",
+    room: "T",
     hash: "a987",
     id: "TEST1",
     password: "adhoc01olzzonTV2",
-    videoDevice: "",
-    audioDevice: "",
+    videoDevice: "1",
+    audioDevice: "1",
   };
+}
+
+// List webcam and audio devices in log: 
+let mediaDevices: MediaDeviceInfo[] = []
+if (navigator.mediaDevices.getUserMedia) {
+  console.log('getUserMedia supported.');
+  console.log(navigator.mediaDevices.getUserMedia({video:true, audio:true}));
+  navigator.mediaDevices.enumerateDevices()
+  .then(function(devices) {
+    mediaDevices = devices
+    devices.forEach(function(device) {
+      console.log(device.kind + ": " + device.label +
+                  " id = " + device.deviceId);
+    });
+  })
+  .catch(function(err) {
+    console.log(err.name + ": " + err.message);
+  });
 }
 
 export const SettingsForm: React.FC = () => {

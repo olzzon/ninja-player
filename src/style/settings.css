@@ -17,3 +17,12 @@
     padding: 5px;
     width: 80%;
 }
+
+.settings-button {
+    font-size: 1.5em;
+    background-color: rgb(50, 50, 50);
+    color: antiquewhite;
+    padding: 5px;
+    width: 80%;
+    margin-top: 1em;
+}

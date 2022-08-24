@@ -13,6 +13,4 @@ export const createUrl = (settings: ISettings) => {
     +`&autostart`;
 };
 
-// Example:
-// settings.webPage = "https://webrtc.olzzon.dk/tv2.html?room=TV2adhoc&hash=a987&v"
 

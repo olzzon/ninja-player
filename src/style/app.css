@@ -2,3 +2,22 @@ body {
     background: #1c1c1c;
     color: #fff;
 }
+
+.app {
+    vertical-align: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 10px;
+}
+
+.webrtc-connect {
+    margin-bottom: 30px;
+    background: #2c2c7b;
+    color: #fff;
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(78, 68, 187);
+    border-style: solid;
+    text-decoration:none;
+}
