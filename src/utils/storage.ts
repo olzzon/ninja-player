@@ -1,3 +1,5 @@
+import { ISettings } from "../model/types";
+
 export const loadSettings = () => {
   const settings = localStorage.getItem("settings");
   if (settings) {
@@ -6,6 +8,7 @@ export const loadSettings = () => {
   return {};
 };
 
-export const saveSettings = (settings: any) => {    
+export const saveSettings = (settings: ISettings) => {  
+  console.log('saveSettings', settings)  
   localStorage.setItem("settings", JSON.stringify(settings));
 }

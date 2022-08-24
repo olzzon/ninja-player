@@ -1,17 +1,27 @@
 import React from "react";
+import { ISettings } from "./model/types";
+import { SettingsForm } from "./settingsMenu";
+import { createUrl } from "./utils/createUrl";
 import { loadSettings } from "./utils/storage";
+import './style/app.css';
 
 
+const settings: ISettings = loadSettings()
+// settings.webPage = "https://webrtc.olzzon.dk/tv2.html"
+const url = createUrl(settings)
 
-const settings: any = loadSettings()
-settings.url = "https://webrtc.olzzon.dk/tv2.html?room=TV2adhoc&hash=a987&v"
+
+console.log('Stored Setting: ', settings)
+// saveSettings(settings)
 
 const App = () => {
     return (
         <div>
             <h1>NINJA - PLAYER
             </h1>
-            <a href={settings.url}>Click me</a>
+            <a href={url}>Connect to WebRTC server</a>
+            <p>Connect with this URL: {url}</p>
+            <SettingsForm />
         </div>
     );
 }
