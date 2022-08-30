@@ -1,9 +1,13 @@
 export interface ISettings {
-    webPage: string;
+    hostWebPage: string;
+    clientWebPage: string;
     room: string;
+    roomHash: string;
     id: string;
     videoDevice: string;
     audioDevice: string;
-    hash: string;
     password: string;
+    passwordHash: string;
+    maxFrameRate: number;
+    refreshHashInterval: number; // in days
 }

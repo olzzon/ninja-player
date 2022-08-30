@@ -2,60 +2,42 @@ import React, { useState } from "react";
 import { ISettings } from "./model/types";
 import { loadSettings, saveSettings } from "./utils/storage";
 import './style/settings.css'
+import { createRandomHash } from "./utils/createRandomHash";
 
-let settings: ISettings = loadSettings();
-
-if (!settings) {
-  settings = {
-    webPage: "https://webrtc.olzzon.dk/tv2.html",
-    room: "T",
-    hash: "a987",
-    id: "TEST1",
-    password: "adhoc01olzzonTV2",
-    videoDevice: "1",
-    audioDevice: "1",
-  };
+interface ISettingsProps {
+  settings: ISettings;
 }
 
-// List webcam and audio devices in log: 
-let mediaDevices: MediaDeviceInfo[] = []
-if (navigator.mediaDevices.getUserMedia) {
-  console.log('getUserMedia supported.');
-  console.log(navigator.mediaDevices.getUserMedia({video:true, audio:true}));
-  navigator.mediaDevices.enumerateDevices()
-  .then(function(devices) {
-    mediaDevices = devices
-    devices.forEach(function(device) {
-      console.log(device.kind + ": " + device.label +
-                  " id = " + device.deviceId);
-    });
-  })
-  .catch(function(err) {
-    console.log(err.name + ": " + err.message);
-  });
-}
-
-export const SettingsForm: React.FC = () => {
-  const [webPage, setWebPage] = useState(settings.webPage);
+export const SettingsForm: React.FC<ISettingsProps> = (props) => {
+  let settings = props.settings
+  const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
+  const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
   const [room, setRoom] = useState(settings.room);
-  const [hash, setHash] = useState(settings.hash);
   const [id, setId] = useState(settings.id);
   const [password, setPassword] = useState(settings.password);
-  const [videoDevice, setVideoDevice] = useState(settings.videoDevice);
-  const [audioDevice, setAudioDevice] = useState(settings.audioDevice);
+  const [videoDevice, setVideoDevice] = useState(settings.videoDevice || '1');
+  const [audioDevice, setAudioDevice] = useState(settings.audioDevice || '1');
+  const [maxFrameRate, setMaxFrameRate] = useState(settings.maxFrameRate);
+  const [refreshHashInterval, setRefreshHashInterval] = useState(settings.refreshHashInterval || 0);
+  const [roomHash] = useState(createRandomHash());
+  const [passwordHash] = useState(createRandomHash());
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     console.log("Settings pre Submit", settings);
     
     settings = {
-      webPage,
+      hostWebPage: hostWebPage,
+      clientWebPage: clientWebPage,
       room,
-      hash,
+      roomHash,
       id,
       password,
+      passwordHash,
       videoDevice,
       audioDevice,
+      maxFrameRate,
+      refreshHashInterval
     };
     console.log("Settings post Submit", settings);
     
@@ -67,35 +49,35 @@ export const SettingsForm: React.FC = () => {
     <div className="settings-window">
       <h2>Settings</h2>
       <label className="settings-label">
-        WebPage:
+        HostWebPage:
         <input
           className="settings-input"
           type="text"
-          value={webPage || ""}
+          value={hostWebPage || ""}
           onChange={(event) => {
-            setWebPage(event.target.value);
+            setHostWebPage(event.target.value);
           }}
         ></input>
       </label>
       <label className="settings-label">
-        Room:
+        ClientWebPage: (optional)
+        <input
+          className="settings-input"
+          type="text"
+          value={clientWebPage || ""}
+          onChange={(event) => {
+            setClientWebPage(event.target.value);
+          }}
+        ></input>
+      </label>
+      <label className="settings-label">
+        Room:(optional)
         <input
           className="settings-input"
           type="text"
           value={room || ""}
           onChange={(event) => {
             setRoom(event.target.value);
-          }}
-        ></input>
-      </label>
-      <label className="settings-label">
-        Hash:
-        <input
-          className="settings-input"
-          type="text"
-          value={hash || ""}
-          onChange={(event) => {
-            setHash(event.target.value);
           }}
         ></input>
       </label>
@@ -111,7 +93,7 @@ export const SettingsForm: React.FC = () => {
         ></input>
       </label>
       <label className="settings-label">
-        Password:
+        Password:(optional)
         <input
           className="settings-input"
           type="text"
@@ -143,6 +125,32 @@ export const SettingsForm: React.FC = () => {
           }}
         ></input>
       </label>
+      <label className="settings-label">
+        Max Frame Rate:
+        <input
+          className="settings-input"
+          type="number"
+          value={maxFrameRate || 50}
+          onChange={(event) => {
+            setMaxFrameRate(parseInt(event.target.value));
+          }
+        }
+        ></input>
+      </label>
+      <label className="settings-label">
+        Refresh Hash Interval: (days)
+        <input
+          className="settings-input"
+          type="number"
+          value={refreshHashInterval || 0}
+          onChange={(event) => {
+            setRefreshHashInterval(parseInt(event.target.value));
+          }
+        }
+        ></input>
+      </label>
+
+
           
       <button className="settings-button" onClick={(e) =>handleSubmit(e)}>
         Save
