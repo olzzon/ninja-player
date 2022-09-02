@@ -30,7 +30,7 @@ export const createDirectorURL = (settings: ISettings) => {
   
   return (
     `${settings.hostWebPage}` +
-    `?direct=${settings.room || settings.roomHash}` +
+    `?director=${settings.room || settings.roomHash}` +
     `&password=${settings.password || settings.passwordHash}`
   );
 }
