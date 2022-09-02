@@ -18,8 +18,8 @@ let settings: ISettings = loadSettings()
 
 if (!settings) {
     settings = {
-      hostWebPage: "https://webrtc.olzzon.dk/olzzon.html",
-      clientWebPage: "https://webrtc.olzzon.dk/olzzon.html",
+      hostWebPage: "",
+      clientWebPage: "",
       room: "",
       roomHash: createRandomHash(),
       id: "Player01",
@@ -35,6 +35,8 @@ if (!settings) {
 const url = createHostUrl(settings)
 
 console.log('Stored Setting: ', settings)
+console.log('Host Web Page: ', url);
+
 window.ipcRenderer.send('settings', settings)
 // saveSettings(settings)
 
@@ -43,10 +45,9 @@ const App = () => {
         <div className="app">
             <h1>NINJA - PLAYER
             </h1>
-            <a href={url} className="webrtc-connect">Connect to WebRTC server</a>
+            <a href={url} className="webrtc-connect">START STREAMING</a>
             <hr/>
             <SettingsForm settings={settings}/>
-            <p>LOG: Connection URL {url}</p>
         </div>
     );
 }

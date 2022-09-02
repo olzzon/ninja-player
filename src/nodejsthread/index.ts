@@ -16,11 +16,10 @@ if (require("electron-squirrel-startup")) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 900,
+    height: 950,
     width: 1700,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
-      // preload: "/Users/olzzon/coding/ninja-player/src/nodejsthread/preload.ts",
       webSecurity: true,
       allowRunningInsecureContent: false,
     },
@@ -68,4 +67,9 @@ ipcMain.on("settings", (event, settings: ISettings) => {
       app.exit(0);
     }, settings.refreshHashInterval * 24 * 60 * 60 * 1000);
   }
+});
+ipcMain.on("restart", (event) => {
+  console.log("Restarting Ninja-player");
+  app.relaunch();
+  app.exit(0);
 });
