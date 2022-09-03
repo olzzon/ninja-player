@@ -64,7 +64,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
         ></input>
       </label>
       <label className="settings-label">
-        HostWebPage:
+        Ingest Web Page:
         <input
           className="settings-input"
           type="text"
@@ -75,7 +75,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
         ></input>
       </label>
       <label className="settings-label">
-        ClientWebPage:
+        Guest Web Page:
         <input
           className="settings-input"
           type="text"

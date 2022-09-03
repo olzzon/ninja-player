@@ -19,11 +19,11 @@ export const expressHandler = (settings: ISettings) => {
   expressApp.get("/linkurl", (req: any, res: any) => {
     console.log("Request :", req);
     res.send(
-      JSON.stringify([
-        createViewerURL(settings),
-        createGuestURL(settings),
-        createDirectorURL(settings),
-      ])
+      JSON.stringify({
+        "viewer": createViewerURL(settings),
+        "guest": createGuestURL(settings),
+        "director": createDirectorURL(settings),
+      })
     );
   });
 };

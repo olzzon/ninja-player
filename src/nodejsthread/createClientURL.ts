@@ -14,7 +14,7 @@ export const createViewerURL = (settings: ISettings) => {
 }
 
 export const createGuestURL = (settings: ISettings) => {
-  console.log("Creating client URL :", settings);
+  console.log("Creating Guest URL :", settings);
   
   return (
     `${settings.clientWebPage || settings.hostWebPage}` +
@@ -26,7 +26,7 @@ export const createGuestURL = (settings: ISettings) => {
 }
 
 export const createDirectorURL = (settings: ISettings) => {
-  console.log("Creating client URL :", settings);
+  console.log("Creating Director URL :", settings);
   
   return (
     `${settings.hostWebPage}` +
