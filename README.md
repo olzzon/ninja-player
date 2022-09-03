@@ -17,7 +17,7 @@ A tool for ingesting video into VDO.Ninja
 - Video Source: 1 is the default camera, if you wish another source, you can write a part of the devicename here. For example, if you have a Logitech C920, you can write "Logitech" here.
 - Audio Source: Same as video source, but for audio.
 - Max Frame Rate: The maximum framerate to use for the video. If you have a beandwith issues you can for clients not to use higher framerates
-- Refresh Hash Interval: Hos often you wish to restart the client. (Used when creating random hash-codes)
+- Refresh Hash Interval: How often you wish to restart the client. (Used for regenerating random hash-codes, e.g. you only wish that links works for 7 days)
 
 
 ## REST API
