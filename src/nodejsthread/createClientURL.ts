@@ -29,7 +29,7 @@ export const createDirectorURL = (settings: ISettings) => {
   console.log("Creating Director URL :", settings);
   
   return (
-    `${settings.hostWebPage}` +
+    `${settings.directorWebPage}` +
     `?director=${settings.room || settings.roomHash}` +
     `&password=${settings.password || settings.passwordHash}`
   );

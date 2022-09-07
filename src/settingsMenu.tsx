@@ -12,6 +12,9 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
   let settings = props.settings;
   const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
   const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
+  const [directorWebPage, setDirectorWebPage] = useState(
+    settings.directorWebPage
+  );
   const [room, setRoom] = useState(settings.room);
   const [id, setId] = useState(settings.id);
   const [password, setPassword] = useState(settings.password);
@@ -29,8 +32,9 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     console.log("Settings pre Submit", settings);
 
     settings = {
-      hostWebPage: hostWebPage,
-      clientWebPage: clientWebPage,
+      hostWebPage,
+      clientWebPage,
+      directorWebPage,
       room,
       roomHash,
       id,
@@ -53,7 +57,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     <div className="settings-window">
       <h2>Settings</h2>
       <label className="settings-label">
-        Id:
+        Source Name:
         <input
           className="settings-input"
           type="text"
@@ -71,6 +75,17 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
           value={hostWebPage || ""}
           onChange={(event) => {
             setHostWebPage(event.target.value);
+          }}
+        ></input>
+      </label>
+      <label className="settings-label">
+        Director web Page:
+        <input
+          className="settings-input"
+          type="text"
+          value={directorWebPage || ""}
+          onChange={(event) => {
+            setDirectorWebPage(event.target.value);
           }}
         ></input>
       </label>

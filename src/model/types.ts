@@ -1,6 +1,7 @@
 export interface ISettings {
     hostWebPage: string;
     clientWebPage: string;
+    directorWebPage: string;
     room: string;
     roomHash: string;
     id: string;
