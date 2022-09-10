@@ -1,4 +1,4 @@
-import { ISettings } from "../model/types";
+import { ISettings } from "../../model/types";
 
 export const createViewerURL = (settings: ISettings) => {
   console.log("Creating client URL :", settings);

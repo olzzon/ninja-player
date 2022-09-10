@@ -2,61 +2,44 @@ import React, { useState } from "react";
 import { ISettings } from "./model/types";
 import { SettingsForm } from "./settingsMenu";
 import { createHostUrl } from "./utils/createHostUrl";
-import { loadSettings } from "./utils/storage";
 import "./style/app.css";
-import { IpcRenderer } from "electron";
-import { createRandomHash } from "./utils/createRandomHash";
+import { IpcMain, IpcRenderer } from "electron";
 import { StreamPage } from "./streaming";
 
 // Definde global window object
 declare global {
   interface Window {
     ipcRenderer: IpcRenderer;
+    ipcMain: IpcMain;
   }
 }
 
-let settings: ISettings = loadSettings();
+let settings: ISettings
 
-if (!settings) {
-  settings = {
-    hostWebPage: "",
-    clientWebPage: "",
-    directorWebPage: "",
-    room: "",
-    roomHash: createRandomHash(),
-    id: "Player01",
-    password: "",
-    passwordHash: createRandomHash(),
-    videoDevice: "1",
-    audioDevice: "1",
-    maxFrameRate: 50,
-    refreshHashInterval: 7,
-  };
-}
-
-const url = createHostUrl(settings);
-
-console.log("Stored Setting: ", settings);
-console.log("Host Web Page: ", url);
-
-window.ipcRenderer.send("settings", settings);
-// saveSettings(settings)
-
-
-// <a href={url} className="webrtc-connect">START STREAMING</a>
 
 const App = () => {
+    const [ingestUrl, setIngestUrl] = useState('');
     const [startStream, setStartStream] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
+    
+    window.ipcRenderer.invoke("get-settings").then((payload: ISettings) => {
+        settings = payload;
+        console.log("Settings", settings);
+        setIngestUrl(createHostUrl(settings));
+        setStartStream(settings.autoStart);
+        setShowSettings(!settings.autoStart)
+    })
+    
   return (
     <div className="app">
       <h1>NINJA - PLAYER</h1>
-      <button className="webrtc-connect" onClick={() => setStartStream(true)}>START STREAMING</button>
-      {startStream ? (
-        <StreamPage url={url} />
-      ) : null}
-      <SettingsForm settings={settings} />
+      <button className="webrtc-connect" onClick={() => setStartStream(true)}>
+        START STREAMING
+      </button>
+      {startStream ? <StreamPage url={ingestUrl} /> : null}
+      {showSettings ? <SettingsForm settings={settings} /> : null}
     </div>
-  ); 
+  );
 };
 
 export default App;

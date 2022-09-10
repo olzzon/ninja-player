@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { ISettings } from "./model/types";
-import { saveSettings } from "./utils/storage";
 import "./style/settings.css";
-import { createRandomHash } from "./utils/createRandomHash";
+import { createRandomHash } from "./nodejsthread/utils/createRandomHash";
 
 interface ISettingsProps {
   settings: ISettings;
@@ -10,6 +9,7 @@ interface ISettingsProps {
 
 export const SettingsForm: React.FC<ISettingsProps> = (props) => {
   let settings = props.settings;
+  const [autoStart, setAutoStart] = useState(false);
   const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
   const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
   const [directorWebPage, setDirectorWebPage] = useState(
@@ -32,6 +32,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     console.log("Settings pre Submit", settings);
 
     settings = {
+      autoStart,
       hostWebPage,
       clientWebPage,
       directorWebPage,
@@ -47,15 +48,20 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     };
     console.log("Settings post Submit", settings);
 
-    saveSettings(settings);
-    setTimeout(() => {
-      window.ipcRenderer.send("restart", settings);
-    }, 1000);
+    window.ipcRenderer.send("save-settings", settings);
   };
 
   return (
     <div className="settings-window">
       <h2>Settings</h2>
+      <label className="settings-label">
+        Auto Start
+        <input
+          type="checkbox"
+          checked={autoStart}
+          onChange={(e) => setAutoStart(e.target.checked)}
+        />
+      </label>
       <label className="settings-label">
         Source Name:
         <input

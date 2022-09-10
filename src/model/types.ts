@@ -1,4 +1,5 @@
 export interface ISettings {
+    autoStart: boolean;
     hostWebPage: string;
     clientWebPage: string;
     directorWebPage: string;

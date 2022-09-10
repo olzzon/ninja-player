@@ -5,7 +5,7 @@ import {
   createDirectorURL,
   createViewerURL,
   createGuestURL,
-} from "./createClientURL";
+} from "./utils/createClientURL";
 
 const PORT = 80;
 
@@ -17,12 +17,12 @@ httpServer.listen(PORT, () => {
 
 export const expressHandler = (settings: ISettings) => {
   expressApp.get("/linkurl", (req: any, res: any) => {
-    console.log("Request :", req);
+    console.log("Request /linkurl:", req);
     res.send(
       JSON.stringify({
-        "viewer": createViewerURL(settings),
-        "guest": createGuestURL(settings),
-        "director": createDirectorURL(settings),
+        viewer: createViewerURL(settings),
+        guest: createGuestURL(settings),
+        director: createDirectorURL(settings),
       })
     );
   });
