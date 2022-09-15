@@ -21,11 +21,15 @@ A tool for ingesting video into VDO.Ninja
 
 
 ## REST API
-GET http://127.0.0.1/linkurl returns:
+GET http://127.0.0.1:3900/linkurl returns:
 {
     viewer: (linkto viewer)
     guest: (linkto guest)
     director: (linkto director)
 }
+
+## LINK WEBPAGE
+http://127.0.0.1:3900
+
 
 

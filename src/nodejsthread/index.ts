@@ -65,6 +65,7 @@ const createWindow = (): void => {
       webSecurity: true,
       allowRunningInsecureContent: false,
     },
+    show: true
   });
 
   Menu.setApplicationMenu(menu);
@@ -101,17 +102,6 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-ipcMain.on("settings", (event, settings: ISettings) => {
-  console.log("Recived settings to main renderer :", settings);
-  expressHandler(settings);
-  if (settings.refreshHashInterval >= 1) {
-    setInterval(() => {
-      console.log("Respawning Ninja-player");
-      restartApp();
-    }, settings.refreshHashInterval * 24 * 60 * 60 * 1000);
-  }
-});
-
 ipcMain.on("restart", () => {
   console.log("Restarting Ninja-player");
   restartApp();
@@ -127,3 +117,6 @@ ipcMain.handle("get-settings", async () => {
   console.log("Get settings");
   return settings;
 });
+
+expressHandler(settings);
+
