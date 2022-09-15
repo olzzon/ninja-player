@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import { quitApp, restartApp } from ".";
 import { ISettings } from "../model/types";
 import {
   createDirectorURL,
@@ -38,19 +39,31 @@ const simpleWebPage = (settings: ISettings) => {
 };
 
 export const expressHandler = (settings: ISettings) => {
-  expressApp.get("/", (req, res) => {
-    res.send(simpleWebPage(settings));
-  });
-  expressApp.get("/linkurl", (req: any, res: any) => {
-    console.log("Request /linkurl:", req);
-    res.send(
-      JSON.stringify({
-        viewer: createViewerURL(settings),
-        guest: createGuestURL(settings),
-        director: createDirectorURL(settings),
-      })
-    );
-  });
+  expressApp
+    .get("/", (req, res) => {
+      res.send(simpleWebPage(settings));
+    })
+    .get("/linkurl", (req: any, res: any) => {
+      console.log("Request /linkurl:", req);
+      res.send(
+        JSON.stringify({
+          viewer: createViewerURL(settings),
+          guest: createGuestURL(settings),
+          director: createDirectorURL(settings),
+        })
+      );
+    })
+    .get("/restart", (req, res) => {
+      console.log("Restarting Ninja-player");
+      res.send("Restarting Ninja-player");
+      restartApp();
+    })
+    .get("/quit", (req, res) => {
+      console.log("Quiting Ninja-player");
+      res.send("Quiting Ninja-player");
+      quitApp();
+    });
+
   httpServer.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });

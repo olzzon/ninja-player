@@ -26,6 +26,13 @@ export const restartApp = () => {
   }, 1000);
 };
 
+export const quitApp = () => {
+  setTimeout(() => {
+    mainWindow.destroy();
+    app.exit(0);
+  }, 1000);
+};
+
 const menu = Menu.buildFromTemplate([
   {
     label: "Menu",
@@ -47,8 +54,7 @@ const menu = Menu.buildFromTemplate([
       {
         label: "Quit",
         click() {
-          mainWindow.destroy();
-          app.quit();
+          quitApp();
         },
       },
     ],
