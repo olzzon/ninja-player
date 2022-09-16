@@ -53,15 +53,21 @@ export const expressHandler = (settings: ISettings) => {
         })
       );
     })
-    .get("/restart", (req, res) => {
-      console.log("Restarting Ninja-player");
-      res.send("Restarting Ninja-player");
-      restartApp();
-    })
-    .get("/quit", (req, res) => {
-      console.log("Quiting Ninja-player");
-      res.send("Quiting Ninja-player");
-      quitApp();
+    .post("/engine", (req, res) => {
+      console.log("Request /engine:", req.query);
+      
+        if (req.query?.action === "quit") {
+          console.log("Quiting Ninja-player");
+          res.send("Quiting Ninja-player");
+          quitApp();
+        } else if (req.query?.action === "restart") {
+          console.log("Restarting Ninja-player");
+          res.send("Restarting Ninja-player");
+          restartApp();
+        } else {
+          console.log('Unknown action:', req.query?.action);
+          
+        }
     });
 
   httpServer.listen(PORT, () => {
