@@ -31,9 +31,8 @@ export const expressHandler = (settings: ISettings) => {
         })
       );
     })
-    .post("/engine", (req, res) => {
+    .get("/engine", (req, res) => {
       console.log("Request /engine:", req.query);
-
       if (req.query?.action === "quit") {
         res.send("Quiting Ninja-player");
         quitApp();
