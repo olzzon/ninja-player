@@ -7,6 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
+    "build-webapp": "cross-env NODE_ENV=production webpack --config webpack.webapp.config.js",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
@@ -51,11 +52,11 @@
               "config": "./webpack.renderer.config.js",
               "entryPoints": [
                 {
-                  "html": "./src/nodejsthread/index.html",
-                  "js": "./src/nodejsthread/renderer.ts",
+                  "html": "./src/server/index.html",
+                  "js": "./src/server/renderer.ts",
                   "name": "main_window",
                   "preload": {
-                    "js": "./src/nodejsthread/preload.ts"
+                    "js": "./src/server/preload.ts"
                   }
                 }
               ]
@@ -91,6 +92,8 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "socket.io": "^4.5.2",
+    "socket.io-client": "^4.5.2"
   }
 }

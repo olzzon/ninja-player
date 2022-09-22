@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ISettings } from "./model/types";
-import "./style/settings.css";
-import { createRandomHash } from "./nodejsthread/utils/createRandomHash";
+import { ISettings } from "../model/types";
+import "../style/settings.css";
+import { createRandomHash } from "../server/utils/createRandomHash";
 
 interface ISettingsProps {
   settings: ISettings;

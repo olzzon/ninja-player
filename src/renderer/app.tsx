@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ISettings } from "./model/types";
+import { ISettings } from "../model/types";
 import { SettingsForm } from "./settingsMenu";
-import { createHostUrl } from "./utils/createHostUrl";
-import "./style/app.css";
+import { createHostUrl } from "../utils/createHostUrl";
+import "../style/app.css";
 import { IpcMain, IpcRenderer } from "electron";
 import { StreamPage } from "./streaming";
 

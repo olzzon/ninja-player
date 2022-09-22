@@ -19,6 +19,7 @@ let mainWindow: BrowserWindow | null;
 const settings: ISettings = loadSettings();
 
 export const restartApp = () => {
+  console.log("Restarting Ninja-player");
   setTimeout(() => {
     app.relaunch();
     mainWindow.destroy();
@@ -27,6 +28,7 @@ export const restartApp = () => {
 };
 
 export const quitApp = () => {
+  console.log("Quiting Ninja-player");
   setTimeout(() => {
     mainWindow.destroy();
     app.exit(0);
@@ -109,7 +111,6 @@ app.on("activate", () => {
 // code. You can also put them in separate files and import them here.
 
 ipcMain.on("restart", () => {
-  console.log("Restarting Ninja-player");
   restartApp();
 });
 
