@@ -8,12 +8,13 @@ import {
   createViewerURL,
   createGuestURL,
 } from "./utils/createClientURL";
+import { createRandomHash } from "./utils/createRandomHash";
+import { saveSettings } from "./utils/storage";
 
 const PORT = 3900;
 
 const expressApp: express.Application = express();
 const httpServer = http.createServer(expressApp);
-
 
 export const expressHandler = (settings: ISettings) => {
   expressApp
@@ -37,6 +38,9 @@ export const expressHandler = (settings: ISettings) => {
         res.send("Quiting Ninja-player");
         quitApp();
       } else if (req.query?.action === "restart") {
+        settings.roomHash = createRandomHash();
+        settings.passwordHash = createRandomHash();
+        saveSettings(settings);
         res.send("Restarting Ninja-player");
         restartApp();
       } else {
