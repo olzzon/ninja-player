@@ -7,6 +7,13 @@ function copyView() {
       navigator.clipboard.writeText(data.viewer);
     });
 }
+function copyBroadcast() {
+  fetch("/linkurl")
+    .then((response) => response.json())
+    .then((data) => {
+      navigator.clipboard.writeText(data.broadcast);
+    });
+}
 function copyGuest() {
   fetch("/linkurl")
     .then((response) => response.json())
@@ -14,13 +21,7 @@ function copyGuest() {
       navigator.clipboard.writeText(data.guest);
     });
 }
-function copyDirector() {
-  fetch("/linkurl")
-    .then((response) => response.json())
-    .then((data) => {
-      navigator.clipboard.writeText(data.director);
-    });
-}
+
 function resetNinjaPlayer() {
   if (window.confirm("Reset Ninja-Player and generate new links?")) {
     fetch("/engine?action=restart");
@@ -66,10 +67,10 @@ export const simpleWebPage = (settings: ISettings) => {
                 .button1 {background-color: #4CAF50;} /* Green */
                 .button2 {background-color: #008CBA;}
             </style>
-            <title>Nija Player</title>
+            <title>Ninja Player</title>
         </head>
         <body>
-          <h1>Ninja - Player Link page:</h1>
+          <h1>${settings.sourceName || 'Ninja - Player'} :</h1>
           <hr/>
           <h3>Viewer URL:</h3>
           <p> 
@@ -81,9 +82,9 @@ export const simpleWebPage = (settings: ISettings) => {
               <button class="button button1" onclick="copyGuest()">COPY GUEST-LINK</button>
             </p>
           <hr/>
-          <h3>Director URL:</h3>
+          <h3>Broadcast URL:</h3>
           <p>
-              <button class="button button1" onclick="copyDirector()">COPY DIRECTOR-LINK</button>
+              <button class="button button1" onclick="copyBroadcast()">COPY BROADCAST-LINK</button>
           </p>
           <hr/>
           <p>
@@ -95,7 +96,7 @@ export const simpleWebPage = (settings: ISettings) => {
         <script>
             ${copyView.toString()}
             ${copyGuest.toString()}
-            ${copyDirector.toString()}
+            ${copyBroadcast.toString()}
             ${resetNinjaPlayer.toString()}
         </script>
       </html>

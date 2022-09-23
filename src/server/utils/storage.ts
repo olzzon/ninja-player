@@ -28,7 +28,7 @@ export const loadSettings = (): ISettings => {
       directorWebPage: "",
       room: "",
       roomHash: createRandomHash(),
-      id: "Player01",
+      sourceName: "Player01",
       password: "",
       passwordHash: createRandomHash(),
       videoDevice: "1",

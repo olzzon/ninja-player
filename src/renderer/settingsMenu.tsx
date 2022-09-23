@@ -16,7 +16,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     settings.directorWebPage
   );
   const [room, setRoom] = useState(settings.room);
-  const [id, setId] = useState(settings.id);
+  const [id, setId] = useState(settings.sourceName);
   const [password, setPassword] = useState(settings.password);
   const [videoDevice, setVideoDevice] = useState(settings.videoDevice || "1");
   const [audioDevice, setAudioDevice] = useState(settings.audioDevice || "1");
@@ -38,7 +38,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
       directorWebPage,
       room,
       roomHash,
-      id,
+      sourceName: id,
       password,
       passwordHash,
       videoDevice,

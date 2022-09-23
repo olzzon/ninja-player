@@ -7,6 +7,7 @@ import {
   createDirectorURL,
   createViewerURL,
   createGuestURL,
+  createBroadcastURL,
 } from "./utils/createClientURL";
 import { createRandomHash } from "./utils/createRandomHash";
 import { saveSettings } from "./utils/storage";
@@ -28,6 +29,7 @@ export const expressHandler = (settings: ISettings) => {
         JSON.stringify({
           viewer: createViewerURL(settings),
           guest: createGuestURL(settings),
+          broadcast: createBroadcastURL(settings),
           director: createDirectorURL(settings),
         })
       );
