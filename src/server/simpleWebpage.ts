@@ -1,5 +1,33 @@
 import { ISettings } from "../model/types";
 
+function copyView() {
+  fetch("/linkurl")
+    .then((response) => response.json())
+    .then((data) => {
+      navigator.clipboard.writeText(data.viewer);
+    });
+}
+function copyGuest() {
+  fetch("/linkurl")
+    .then((response) => response.json())
+    .then((data) => {
+      navigator.clipboard.writeText(data.guest);
+    });
+}
+function copyDirector() {
+  fetch("/linkurl")
+    .then((response) => response.json())
+    .then((data) => {
+      navigator.clipboard.writeText(data.director);
+    });
+}
+function resetNinjaPlayer() {
+  if (window.confirm("Reset Ninja-Player and generate new links?")) {
+    fetch("/engine?action=restart");
+    setTimeout("location.reload(true);", 5000);
+  }
+}
+
 export const simpleWebPage = (settings: ISettings) => {
   return `
       <html>
@@ -42,20 +70,18 @@ export const simpleWebPage = (settings: ISettings) => {
         </head>
         <body>
           <h1>Ninja - Player Link page:</h1>
-          <h3>Viewer URL:</h3>
           <hr/>
+          <h3>Viewer URL:</h3>
           <p> 
               <button class="button button1" onclick="copyView()">COPY VIEWER-LINK</button>
           </p>
           <hr/>
           <h3>Guest (1:1) URL:</h3>
-          <hr/>
           <p>
               <button class="button button1" onclick="copyGuest()">COPY GUEST-LINK</button>
             </p>
           <hr/>
           <h3>Director URL:</h3>
-          <hr/>
           <p>
               <button class="button button1" onclick="copyDirector()">COPY DIRECTOR-LINK</button>
           </p>
@@ -67,36 +93,10 @@ export const simpleWebPage = (settings: ISettings) => {
 
         </body>
         <script>
-            function copyView() {
-                fetch('/linkurl')
-                .then(response => response.json())
-                .then(data => {
-                    navigator.clipboard.writeText(data.viewer);
-                }  
-                );
-            }
-            function copyGuest() {
-                fetch('/linkurl')
-                .then(response => response.json())
-                .then(data => {
-                    navigator.clipboard.writeText(data.guest);
-                }  
-                );
-            }
-            function copyDirector() {
-                fetch('/linkurl')
-                .then(response => response.json())
-                .then(data => {
-                    navigator.clipboard.writeText(data.director);
-                }  
-                );
-            }
-            function resetNinjaPlayer() {
-                if (window.confirm("Reset Ninja-Player and generate new links?")) {
-                    fetch('/engine?action=restart')
-                    setTimeout("location.reload(true);", 5000);
-                }
-            }
+            ${copyView.toString()}
+            ${copyGuest.toString()}
+            ${copyDirector.toString()}
+            ${resetNinjaPlayer.toString()}
         </script>
       </html>
     `;
