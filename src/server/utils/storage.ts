@@ -21,8 +21,9 @@ export const loadSettings = (): ISettings => {
   } catch (e) {
     console.log("Error loading settings:", e);
     console.log("Creating and storing new settings");
-    const settings = {
+    const settings: ISettings = {
       autoStart: false,
+      webserverURL: "http://localhost:3900",
       hostWebPage: "",
       clientWebPage: "",
       directorWebPage: "",
@@ -34,7 +35,7 @@ export const loadSettings = (): ISettings => {
       videoDevice: "1",
       audioDevice: "1",
       maxFrameRate: 50,
-      refreshHashInterval: 7,
+      refreshHashInterval: 0,
     };
     saveSettings(settings);
     return settings;

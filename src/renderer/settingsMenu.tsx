@@ -10,6 +10,7 @@ interface ISettingsProps {
 export const SettingsForm: React.FC<ISettingsProps> = (props) => {
   let settings = props.settings;
   const [autoStart, setAutoStart] = useState(false);
+  const [webserverURL, setWebserverURL] = useState(settings.webserverURL);
   const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
   const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
   const [directorWebPage, setDirectorWebPage] = useState(
@@ -33,6 +34,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
 
     settings = {
       autoStart,
+      webserverURL,
       hostWebPage,
       clientWebPage,
       directorWebPage,
@@ -72,6 +74,15 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
             setId(event.target.value);
           }}
         ></input>
+      </label>
+      <label className="settings-label">
+        Webserver URL:
+        <input
+          className="settings-input"
+          type="text"
+          value={webserverURL}
+          onChange={(e) => setWebserverURL(e.target.value)}
+        />
       </label>
       <label className="settings-label">
         Ingest Web Page:
@@ -162,7 +173,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
         ></input>
       </label>
       <label className="settings-label">
-        Refresh Hash Interval: (days)
+        Refresh Hash Interval: (days - 0=never)
         <input
           className="settings-input"
           type="number"

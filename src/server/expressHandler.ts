@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { quitApp, restartApp } from ".";
 import { ISettings } from "../model/types";
-import { simpleWebPage } from "./simpleWebpage";
+import { simpleWebPage } from "./adminserver/simpleWebpage";
 import {
   createDirectorURL,
   createViewerURL,
