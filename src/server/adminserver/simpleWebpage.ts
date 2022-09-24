@@ -1,5 +1,36 @@
 import { ISettings } from "../../model/types";
 
+export const viewerLink = (linkURL: string) => {
+  return `
+  <html>
+    <head>
+      <style>
+          body {
+                  background-color: black;
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-size: 20px;
+                  padding: 20px;
+                  justify-content: center;
+              }
+          h1, a  {
+                color: white;
+                justify-content: center;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 6em;
+              }
+            
+      </style>
+      <title>Ninja Player</title>
+    </head>
+    <body>
+          <a href="${linkURL}">LINK TO VIEW</a>
+    </body>
+  </html>
+  `
+}
+
 export const simpleWebPage = (settings: ISettings) => {
   return `
       <html>
@@ -73,21 +104,21 @@ export const simpleWebPage = (settings: ISettings) => {
 
         </body>
         <script>
-            function copyView(webserverURL: string) {
+            function copyView(webserverURL) {
               fetch(webserverURL + "/linkurl")
                 .then((response) => response.json())
                 .then((data) => {
                   navigator.clipboard.writeText(data.viewer);
                 });
             }
-            function copyBroadcast(webserverURL: string) {
+            function copyBroadcast(webserverURL) {
               fetch(webserverURL + "/linkurl")
                 .then((response) => response.json())
                 .then((data) => {
                   navigator.clipboard.writeText(data.broadcast);
                 });
             }
-            function copyGuest(webserverURL: string) {
+            function copyGuest(webserverURL) {
               fetch(webserverURL + "/linkurl")
                 .then((response) => response.json())
                 .then((data) => {
@@ -95,7 +126,7 @@ export const simpleWebPage = (settings: ISettings) => {
                 });
             }
             
-            function resetNinjaPlayer(webserverURL: string) {
+            function resetNinjaPlayer(webserverURL) {
               if (window.confirm("Reset Ninja-Player and generate new links?")) {
                 fetch(webserverURL + "/engine?action=restart");
                 setTimeout("location.reload(true);", 5000);

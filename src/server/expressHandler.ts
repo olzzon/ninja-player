@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { quitApp, restartApp } from ".";
 import { ISettings } from "../model/types";
-import { simpleWebPage } from "./adminserver/simpleWebpage";
+import { simpleWebPage, viewerLink } from "./adminserver/simpleWebpage";
 import {
   createDirectorURL,
   createViewerURL,
@@ -32,6 +32,12 @@ export const expressHandler = (settings: ISettings) => {
           broadcast: createBroadcastURL(settings),
           director: createDirectorURL(settings),
         })
+      );
+    })
+    .get("/view", (req: any, res: any) => {
+      console.log("Request /linkurl:", req);
+      res.send(
+        viewerLink(createViewerURL(settings))
       );
     })
     .get("/engine", (req, res) => {
