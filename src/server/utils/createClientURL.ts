@@ -10,6 +10,7 @@ export const createViewerURL = (settings: ISettings) => {
     `&view=${sourceName}` +
     `&password=${settings.password || settings.passwordHash}` +
     `&scene` +
+    `&codec=h264` +
     `&bitrate=8000`
   );
 }
@@ -39,6 +40,7 @@ export const createGuestURL = (settings: ISettings) => {
     `?room=${settings.room || settings.roomHash}` +
     `&view=${sourceName}` +
     `&password=${settings.password || settings.passwordHash}` +
+    `&codec=h264` +
     `&bitrate=8000`
   );
 }

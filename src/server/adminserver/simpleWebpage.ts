@@ -1,4 +1,5 @@
 import { ISettings } from "../../model/types";
+import { createViewerURL } from "../utils/createClientURL";
 
 export const viewerLink = (linkURL: string) => {
   return `
@@ -43,6 +44,7 @@ export const simpleWebPage = (settings: ISettings) => {
                         font-size: 20px;
                         padding: 20px;
                         justify-content: center;
+                        text-align: center;
                     }
                 h1, h2, h3  {
                         color: white;
@@ -68,6 +70,15 @@ export const simpleWebPage = (settings: ISettings) => {
                   }                  
                 .button1 {background-color: #4CAF50;} /* Green */
                 .button2 {background-color: #008CBA;}
+                .link {
+                        color: white;
+                        background-color: rgb(57, 100, 57);
+                        justify-content: center;
+                        text-align: center;
+                        font-family: Arial, Helvetica, sans-serif;
+                        width: 300px;
+                        font-size: 1.6em;
+                }
             </style>
             <title>Ninja Player</title>
         </head>
@@ -101,6 +112,12 @@ export const simpleWebPage = (settings: ISettings) => {
               }')">GENERATE NEW LINKS</button>
           </p>
           <hr/>
+          <h3>
+            DIRECT LINK:
+          </h3>
+          <a class="link" href="${createViewerURL(settings)}">JUMP TO VIEWER</a>
+          <hr/>
+
 
         </body>
         <script>
