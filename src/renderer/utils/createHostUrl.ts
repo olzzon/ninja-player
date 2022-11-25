@@ -1,4 +1,4 @@
-import { ISettings } from "../model/types";
+import { ISettings } from "../../model/types";
 
 export const createHostUrl = (settings: ISettings) => {
   const sourceName = settings.sourceName.replace(/ /g, '');
@@ -11,6 +11,7 @@ export const createHostUrl = (settings: ISettings) => {
     `&vdevice=${settings.videoDevice}` +
     `&adevice=${settings.audioDevice}` +
     `&maxFrameRate=${settings.maxFrameRate}` +
+    `&s` +
     `&webcam` +
     `&autostart`
   );

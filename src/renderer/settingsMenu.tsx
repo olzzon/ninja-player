@@ -55,7 +55,6 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
 
   return (
     <div className="settings-window">
-      <h2>Settings</h2>
       <label className="settings-label">
         Auto Start
         <input

@@ -99,11 +99,11 @@ export const simpleWebPage = (settings: ISettings) => {
               }')">COPY GUEST-LINK</button>
             </p>
           <hr/>
-          <h3>Broadcast Quality URL:</h3>
+          <h3>High Quality URL:</h3>
           <p>
               <button class="button button1" onclick="copyBroadcast('${
                 settings.webserverURL
-              }')">COPY BROADCAST-LINK</button>
+              }')">COPY HIGH QUALITY-LINK</button>
           </p>
           <hr/>
           <p>

@@ -7,12 +7,14 @@ A tool for ingesting video into VDO.Ninja
 
 
 ## Screen layout:
-<img src='./docs/screen.png' width='600px' />
+<img src='./docs/settingspage.png' width='600px' />
 
 
 ## Configuration
+- Auto Start: Start the player automatically when the page loads, when restarting the app will autostart and not show the settings menu, go to the menubar and select "disable auto start" if you need to change the settings.
 - Ingest Web Page: The URL of the WebRTC server
 - Guest Web Page: Optional, if there's different link for ingest/director and guests/viewers
+- Director Web Page: Optional, if there's different link for ingest/director and guests/viewers.
 - Room and Password: If you wish static room and password, you can set it here. Otherwise, it will be generated randomly.
 - Video Source: 1 is the default camera, if you wish another source, you can write a part of the devicename here. For example, if you have a Logitech C920, you can write "Logitech" here.
 - Audio Source: Same as video source, but for audio.
@@ -37,7 +39,10 @@ POST http://localhost:3900/engine?action=quit
 
 
 ## LINK WEBPAGE
-http://127.0.0.1:3900
+
+There's a build in webserver that serves a webpage with links to the videostreams. You can access it by going to http://localhost:3900
+
+<img src='./docs/getlinkpage.png' width='600px' />
 
 
 
