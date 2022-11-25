@@ -1,7 +1,7 @@
 {
   "name": "ninja-player",
   "productName": "ninja-player",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Video ingest to VDO.ninja",
   "main": ".webpack/main",
   "scripts": {
