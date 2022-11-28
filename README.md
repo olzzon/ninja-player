@@ -1,6 +1,8 @@
 # Ninja Player
 A tool for ingesting video into VDO.Ninja
 
+After trying out different methods for ingesting video into WebRTC, i came to the conclusion that Browser engines are the most updated in functionality and speed, so i decided to create a tool that would allow me to ingest video into WebRTC using the Electron Browser engine.
+
 ## Features
 * Ingests video from a live source
 * REST API for getting links to the videostreams
