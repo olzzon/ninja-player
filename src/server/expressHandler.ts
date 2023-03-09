@@ -47,7 +47,7 @@ export const expressHandler = (settings: ISettings) => {
       if (req.query?.action === "quit") {
         res.send("Quiting Ninja-player");
         quitApp();
-      } else if (req.query?.action === "restart") {
+      } else if (req.query?.action === "renewhash") {
         settings.roomHash = createRandomHash();
         settings.passwordHash = createRandomHash();
         saveSettings(settings);
