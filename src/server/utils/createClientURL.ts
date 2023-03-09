@@ -1,5 +1,20 @@
 import { ISettings } from "../../model/types";
 
+export const createLoResURL = (settings: ISettings) => {
+  console.log("Creating client URL :", settings);
+  const sourceName = settings.sourceName.replace(/ /g, '');
+  
+  return (
+    `${settings.clientWebPage || settings.hostWebPage}` +
+    `?room=${settings.room || settings.roomHash}` +
+    `&view=${sourceName}` +
+    `&password=${settings.password || settings.passwordHash}` +
+    `&scene` +
+    `&codec=vp8` +
+    `&bitrate=900`
+  );
+}
+
 export const createViewerURL = (settings: ISettings) => {
   console.log("Creating client URL :", settings);
   const sourceName = settings.sourceName.replace(/ /g, '');

@@ -8,6 +8,7 @@ import {
   createViewerURL,
   createGuestURL,
   createBroadcastURL,
+  createLoResURL,
 } from "./utils/createClientURL";
 import { createRandomHash } from "./utils/createRandomHash";
 import { saveSettings } from "./utils/storage";
@@ -31,6 +32,7 @@ export const expressHandler = (settings: ISettings) => {
           guest: createGuestURL(settings),
           broadcast: createBroadcastURL(settings),
           director: createDirectorURL(settings),
+          lores: createLoResURL(settings)
         })
       );
     })
