@@ -9,7 +9,6 @@
     "package": "electron-forge package",
     "build-webapp": "cross-env NODE_ENV=production webpack --config webpack.webapp.config.js",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
