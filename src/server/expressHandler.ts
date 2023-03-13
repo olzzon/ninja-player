@@ -48,7 +48,9 @@ export const expressHandler = (settings: ISettings) => {
   });
 
   if (settings.portalUrl) {
+    setInterval(() => {
       restApiPostToPortal(settings);
       console.log(`Posting to ${settings.portalUrl}`);
+    }, 10000);
   }
 };
