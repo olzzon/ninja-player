@@ -1,16 +1,16 @@
 export interface ISettings {
+    id: string;
     autoStart: boolean;
+    renewHashAtStart: boolean;
     webserverURL: string;
     hostWebPage: string;
     clientWebPage: string;
     directorWebPage: string;
-    room: string;
+    portalUrl?: string;
     roomHash: string;
     sourceName: string;
     videoDevice: string;
     audioDevice: string;
-    password: string;
     passwordHash: string;
     maxFrameRate: number;
-    refreshHashInterval: number; // in days
 }

@@ -6,9 +6,9 @@ export const createLoResURL = (settings: ISettings) => {
   
   return (
     `${settings.clientWebPage || settings.hostWebPage}` +
-    `?room=${settings.room || settings.roomHash}` +
+    `?room=${settings.roomHash}` +
     `&view=${sourceName}` +
-    `&password=${settings.password || settings.passwordHash}` +
+    `&password=${settings.passwordHash}` +
     `&scene` +
     `&codec=vp8` +
     `&bitrate=900`
@@ -21,9 +21,9 @@ export const createViewerURL = (settings: ISettings) => {
   
   return (
     `${settings.clientWebPage || settings.hostWebPage}` +
-    `?room=${settings.room || settings.roomHash}` +
+    `?room=${settings.roomHash}` +
     `&view=${sourceName}` +
-    `&password=${settings.password || settings.passwordHash}` +
+    `&password=${settings.passwordHash}` +
     `&scene` +
     `&codec=h264` +
     `&bitrate=8000`
@@ -36,9 +36,9 @@ export const createBroadcastURL = (settings: ISettings) => {
   
   return (
     `${settings.clientWebPage || settings.hostWebPage}` +
-    `?room=${settings.room || settings.roomHash}` +
+    `?room=${settings.roomHash}` +
     `&view=${sourceName}` +
-    `&password=${settings.password || settings.passwordHash}` +
+    `&password=${settings.passwordHash}` +
     `&scene` +
     `&bitrate=48000` +
     `&s` +
@@ -52,9 +52,9 @@ export const createGuestURL = (settings: ISettings) => {
   
   return (
     `${settings.clientWebPage || settings.hostWebPage}` +
-    `?room=${settings.room || settings.roomHash}` +
+    `?room=${settings.roomHash}` +
     `&view=${sourceName}` +
-    `&password=${settings.password || settings.passwordHash}` +
+    `&password=${settings.passwordHash}` +
     `&codec=h264` +
     `&bitrate=8000`
   );
@@ -65,7 +65,17 @@ export const createDirectorURL = (settings: ISettings) => {
   
   return (
     `${settings.directorWebPage}` +
-    `?director=${settings.room || settings.roomHash}` +
-    `&password=${settings.password || settings.passwordHash}`
+    `?director=${settings.roomHash}` +
+    `&password=${settings.passwordHash}`
   );
+}
+
+export const createAllURLs = (settings: ISettings) => {
+  return {
+    viewer: createViewerURL(settings),
+    guest: createGuestURL(settings),
+    broadcast: createBroadcastURL(settings),
+    director: createDirectorURL(settings),
+    lores: createLoResURL(settings)
+  };
 }

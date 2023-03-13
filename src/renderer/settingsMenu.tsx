@@ -10,45 +10,41 @@ interface ISettingsProps {
 export const SettingsForm: React.FC<ISettingsProps> = (props) => {
   let settings = props.settings;
   const [autoStart, setAutoStart] = useState(false);
+  const [renewHashAtStart, setRenewHashAtStart] = useState<boolean>(settings.renewHashAtStart || true);
   const [webserverURL, setWebserverURL] = useState(settings.webserverURL);
+  const [portalURL, setPortalURL] = useState(settings.portalUrl || "");
   const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
   const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
   const [directorWebPage, setDirectorWebPage] = useState(
     settings.directorWebPage
   );
-  const [room, setRoom] = useState(settings.room);
-  const [id, setId] = useState(settings.sourceName);
-  const [password, setPassword] = useState(settings.password);
+  const [sourceName, setSourceName] = useState(settings.sourceName);
   const [videoDevice, setVideoDevice] = useState(settings.videoDevice || "1");
   const [audioDevice, setAudioDevice] = useState(settings.audioDevice || "1");
   const [maxFrameRate, setMaxFrameRate] = useState(settings.maxFrameRate);
-  const [refreshHashInterval, setRefreshHashInterval] = useState(
-    settings.refreshHashInterval || 0
-  );
   const [roomHash] = useState(createRandomHash());
   const [passwordHash] = useState(createRandomHash());
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log("Settings pre Submit", settings);
 
     settings = {
+      id: settings.id,
       autoStart,
       webserverURL,
       hostWebPage,
+      portalUrl: portalURL,
       clientWebPage,
       directorWebPage,
-      room,
       roomHash,
-      sourceName: id,
-      password,
+      sourceName: sourceName,
       passwordHash,
       videoDevice,
       audioDevice,
       maxFrameRate,
-      refreshHashInterval,
+      renewHashAtStart,
     };
-    console.log("Settings post Submit", settings);
+    console.log("Settings Submit", settings);
 
     window.ipcRenderer.send("save-settings", settings);
   };
@@ -64,23 +60,43 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
         />
       </label>
       <label className="settings-label">
-        Source Name:
+        Renew Hash at Start
+        <input
+          type="checkbox"
+          checked={renewHashAtStart}
+          onChange={(e) => setRenewHashAtStart(e.target.checked)}
+        />
+      </label>
+      <label className="settings-label">
+        Unique ID (Portal Reference): {settings.id}
+      </label>
+      <label className="settings-label">
+        Source Name:(letters and numbers NO spaces)
         <input
           className="settings-input"
           type="text"
-          value={id || ""}
+          value={sourceName || ""}
           onChange={(event) => {
-            setId(event.target.value);
+            setSourceName(event.target.value);
           }}
         ></input>
       </label>
       <label className="settings-label">
-        Webserver URL:
+        Local Webserver URL:
         <input
           className="settings-input"
           type="text"
           value={webserverURL}
           onChange={(e) => setWebserverURL(e.target.value)}
+        />
+      </label>
+      <label className="settings-label">
+        WebRTC Portal URL:
+        <input
+          className="settings-input"
+          type="text"
+          value={portalURL}
+          onChange={(e) => setPortalURL(e.target.value)}
         />
       </label>
       <label className="settings-label">
@@ -117,28 +133,6 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
         ></input>
       </label>
       <label className="settings-label">
-        Room: (none=random)
-        <input
-          className="settings-input"
-          type="text"
-          value={room || ""}
-          onChange={(event) => {
-            setRoom(event.target.value);
-          }}
-        ></input>
-      </label>
-      <label className="settings-label">
-        Password: (none=random)
-        <input
-          className="settings-input"
-          type="text"
-          value={password || ""}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        ></input>
-      </label>
-      <label className="settings-label">
         Video Source: (1=default or part of device name)
         <input
           className="settings-input"
@@ -168,17 +162,6 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
           value={maxFrameRate || 50}
           onChange={(event) => {
             setMaxFrameRate(parseInt(event.target.value));
-          }}
-        ></input>
-      </label>
-      <label className="settings-label">
-        Refresh Hash Interval: (days - 0=never)
-        <input
-          className="settings-input"
-          type="number"
-          value={refreshHashInterval || 0}
-          onChange={(event) => {
-            setRefreshHashInterval(parseInt(event.target.value));
           }}
         ></input>
       </label>

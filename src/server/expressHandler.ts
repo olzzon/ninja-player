@@ -1,16 +1,11 @@
-import express from "express";
+import express, {Response, Request} from "express";
 import http from "http";
 import { quitApp, restartApp } from ".";
 import { ISettings } from "../model/types";
 import { simpleWebPage, viewerLink } from "./adminserver/simpleWebpage";
-import {
-  createDirectorURL,
-  createViewerURL,
-  createGuestURL,
-  createBroadcastURL,
-  createLoResURL,
-} from "./utils/createClientURL";
+import { createViewerURL, createAllURLs } from "./utils/createClientURL";
 import { createRandomHash } from "./utils/createRandomHash";
+import { restApiPostToPortal } from "./utils/restApiPostToPortal";
 import { saveSettings } from "./utils/storage";
 
 const PORT = 3900;
@@ -20,27 +15,17 @@ const httpServer = http.createServer(expressApp);
 
 export const expressHandler = (settings: ISettings) => {
   expressApp
-    .get("/", (req: any, res: any) => {
+    .get("/", (req: Request, res: Response) => {
       console.log("Request :", req);
       res.send(simpleWebPage(settings));
     })
-    .get("/linkurl", (req: any, res: any) => {
+    .get("/linkurl", (req: Request, res: Response) => {
       console.log("Request /linkurl:", req);
-      res.send(
-        JSON.stringify({
-          viewer: createViewerURL(settings),
-          guest: createGuestURL(settings),
-          broadcast: createBroadcastURL(settings),
-          director: createDirectorURL(settings),
-          lores: createLoResURL(settings)
-        })
-      );
+      res.send(JSON.stringify(createAllURLs(settings)));
     })
-    .get("/view", (req: any, res: any) => {
+    .get("/view", (req: Request, res: Response) => {
       console.log("Request /linkurl:", req);
-      res.send(
-        viewerLink(createViewerURL(settings))
-      );
+      res.send(viewerLink(createViewerURL(settings)));
     })
     .get("/engine", (req, res) => {
       console.log("Request /engine:", req.query);
@@ -61,4 +46,9 @@ export const expressHandler = (settings: ISettings) => {
   httpServer.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
+
+  if (settings.portalUrl) {
+      restApiPostToPortal(settings);
+      console.log(`Posting to ${settings.portalUrl}`);
+  }
 };
