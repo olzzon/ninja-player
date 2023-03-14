@@ -11,7 +11,6 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
   let settings = props.settings;
   const [autoStart, setAutoStart] = useState(false);
   const [renewHashAtStart, setRenewHashAtStart] = useState<boolean>(settings.renewHashAtStart || true);
-  const [webserverURL, setWebserverURL] = useState(settings.webserverURL);
   const [portalURL, setPortalURL] = useState(settings.portalUrl || "");
   const [hostWebPage, setHostWebPage] = useState(settings.hostWebPage);
   const [clientWebPage, setClientWebPage] = useState(settings.clientWebPage);
@@ -31,7 +30,7 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
     settings = {
       id: settings.id,
       autoStart,
-      webserverURL,
+      webserverURL: settings.webserverURL,
       hostWebPage,
       portalUrl: portalURL,
       clientWebPage,
@@ -80,15 +79,6 @@ export const SettingsForm: React.FC<ISettingsProps> = (props) => {
             setSourceName(event.target.value);
           }}
         ></input>
-      </label>
-      <label className="settings-label">
-        Local Webserver URL:
-        <input
-          className="settings-input"
-          type="text"
-          value={webserverURL}
-          onChange={(e) => setWebserverURL(e.target.value)}
-        />
       </label>
       <label className="settings-label">
         WebRTC Portal URL:
