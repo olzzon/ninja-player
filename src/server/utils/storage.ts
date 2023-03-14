@@ -19,7 +19,11 @@ export const loadSettings = (): ISettings => {
     const settings: ISettings = JSON.parse(settingsString);
     if (settings.id === undefined) {
       settings.id = createRandomHash();
-      settings.renewHashAtStart = false;
+      settings.renewHashAtStart = true;
+    }
+    if (settings.renewHashAtStart) {
+      settings.roomHash = createRandomHash();
+      settings.passwordHash = createRandomHash();
     }
     return settings;
   } catch (e) {
