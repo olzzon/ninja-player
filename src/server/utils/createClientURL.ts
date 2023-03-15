@@ -1,7 +1,6 @@
 import { ISettings } from "../../model/types";
 
 export const createLoResURL = (settings: ISettings) => {
-  console.log("Creating client URL :", settings);
   const sourceName = settings.sourceName.replace(/ /g, '');
   
   return (
@@ -16,7 +15,6 @@ export const createLoResURL = (settings: ISettings) => {
 }
 
 export const createViewerURL = (settings: ISettings) => {
-  console.log("Creating client URL :", settings);
   const sourceName = settings.sourceName.replace(/ /g, '');
   
   return (
@@ -31,7 +29,6 @@ export const createViewerURL = (settings: ISettings) => {
 }
 
 export const createBroadcastURL = (settings: ISettings) => {
-  console.log("Creating client URL :", settings);
   const sourceName = settings.sourceName.replace(/ /g, '');
   
   return (
@@ -47,7 +44,6 @@ export const createBroadcastURL = (settings: ISettings) => {
 }
 
 export const createGuestURL = (settings: ISettings) => {
-  console.log("Creating Guest URL :", settings);
   const sourceName = settings.sourceName.replace(/ /g, '');
   
   return (
@@ -60,9 +56,7 @@ export const createGuestURL = (settings: ISettings) => {
   );
 }
 
-export const createDirectorURL = (settings: ISettings) => {
-  console.log("Creating Director URL :", settings);
-  
+export const createDirectorURL = (settings: ISettings) => {  
   return (
     `${settings.directorWebPage}` +
     `?director=${settings.roomHash}` +
@@ -71,6 +65,7 @@ export const createDirectorURL = (settings: ISettings) => {
 }
 
 export const createAllURLs = (settings: ISettings) => {
+  console.log("Creating URLs :", settings.clientWebPage);
   return {
     viewer: createViewerURL(settings),
     guest: createGuestURL(settings),
