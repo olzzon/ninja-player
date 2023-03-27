@@ -48,11 +48,12 @@ jobs:
         uses: actions/create-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          env.VERSION: ${{ github.ref }}
         with:
-          tag_name: v${{ env.VERSION }}
-          release_name: Release ${{ env.VERSION }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
-            Release ${{ env.VERSION }} for ${{ matrix.os }}
+            Release ${{ github.ref }} for ${{ matrix.os }}
           draft: false
           prerelease: false
       - name: Upload Assets
@@ -61,6 +62,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/NinjaPlayer-${{ env.VERSION }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
-          asset_name: NinjaPlayer-${{ env.VERSION }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
+          asset_path: ./dist/NinjaPlayer-${{ github.ref }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
+          asset_name: NinjaPlayer-${{ github.ref }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
           asset_content_type: application/${{ env.FILE_EXTENSION }}
