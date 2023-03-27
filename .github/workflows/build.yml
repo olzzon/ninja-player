@@ -43,8 +43,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create Release
-        uses: actions/create-release@v1
+      - id: Create Release
+        uses: actions/create-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -54,6 +54,8 @@ jobs:
             Release ${{ env.VERSION }} for ${{ matrix.os }}
           draft: false
           prerelease: false
+        outputs:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
       - name: Upload Assets
         uses: actions/upload-release-asset@v1
         env:
