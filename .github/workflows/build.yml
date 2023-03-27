@@ -37,7 +37,7 @@ jobs:
           npm run make
   release:
     name: Create Release
-    needs: build
+    needs: build-electron-app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
