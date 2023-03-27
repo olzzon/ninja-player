@@ -2,12 +2,16 @@ name: Build Electron App
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
   build-electron-app:
-    name: Build Electron App
-    runs-on: ubuntu-latest
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
 
     steps:
       - name: Checkout repository
@@ -31,11 +35,6 @@ jobs:
         if: matrix.os == 'macos'
         run: |
           npm run make
-          npm run package
-
-    strategy:
-      matrix:
-        os: [windows, macos]
   release:
     name: Create Release
     needs: build
