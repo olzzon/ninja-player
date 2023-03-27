@@ -36,3 +36,31 @@ jobs:
     strategy:
       matrix:
         os: [windows, macos]
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.VERSION }}
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            Release ${{ env.VERSION }} for ${{ matrix.os }}
+          draft: false
+          prerelease: false
+      - name: Upload Assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/NinjaPlayer-${{ env.VERSION }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
+          asset_name: NinjaPlayer-${{ env.VERSION }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
+          asset_content_type: application/${{ env.FILE_EXTENSION }}
