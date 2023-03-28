@@ -23,18 +23,19 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build Electron App for Windows
         if: matrix.os == 'windows'
         run: |
-          npm run make
-          npm run package
+          yarn make
+          yarn package
 
       - name: Build Electron App for MacOS
         if: matrix.os == 'macos'
         run: |
-          npm run make
+          yarn make
+          yarn package
   release:
     name: Create Release
     needs: build-electron-app
@@ -52,16 +53,17 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: |
-            Release ${{ github.ref }} for ${{ matrix.os }}
           draft: false
           prerelease: false
+          run: |
+            zip --junk-paths ninja-player README.md
       - name: Upload Assets
+        id: upload_asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/${{ matrix.os }}
-          asset_name: NinjaPlayer-${{ github.ref }}-${{ matrix.os }}.${{ env.FILE_EXTENSION }}
-          asset_content_type: application/${{ env.FILE_EXTENSION }}
+          asset_path: ./ninja-player.zip
+          asset_name: ninja-player.zip
+          asset_content_type: application/zip
