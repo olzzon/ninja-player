@@ -47,4 +47,15 @@ There's a build in webserver that serves a webpage with links to the videostream
 <img src='./docs/getlinkpage.png' width='600px' />
 
 
+### Mac OS X - setup:
+## Automatcally reboot mac at 4am
+```
+sudo pmset repeat wakeorpoweron MTWRFSU 04:00:00
+```
+## Auto start of Ninja Player at boot - delayed (for 30 seconds)
+```
+sudo defaults write /Library/Preferences/loginwindow AutoLaunchedApplicationDictionary -array-add '{ "Path" = "/Applications/Ninja Player.app"; "Delay" = 30; }'
+```
+
+
 
