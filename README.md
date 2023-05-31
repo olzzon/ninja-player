@@ -48,14 +48,20 @@ There's a build in webserver that serves a webpage with links to the videostream
 
 
 ### Mac OS X - setup:
-## Automatcally reboot mac at 4am
+
+## Cron job that runs forcequit.sh at 4am
 ```
-sudo pmset repeat wakeorpoweron MTWRFSU 04:00:00
+export EDITOR=nano
+sudo crontab -e
 ```
-## Auto start of Ninja Player at boot - delayed (for 30 seconds)
+Add this line:
 ```
-sudo defaults write /Library/Preferences/loginwindow AutoLaunchedApplicationDictionary -array-add '{ "Path" = "/Applications/Ninja Player.app"; "Delay" = 30; }'
+0 4 * * * /bin/bash /path/to/file/forcequit.sh >/tmp/stdout.log 2>/tmp/stderr.log
 ```
+(There's an example /docs/example scripts/forcequit.sh file in the repo)
+
+## Auto start of Ninja Player at boot - delayed 30 sec (For webCam to load first)
+Use the example in /docs/example scripts/delay-start.ninja.scpt
 
 
 
