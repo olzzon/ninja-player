@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, powerMonitor } from "electron";
 import { ISettings } from "../model/types";
 import { expressHandler } from "./expressHandler";
 import { loadSettings, saveSettings } from "./utils/storage";
@@ -55,6 +55,7 @@ const menu = Menu.buildFromTemplate([
       },
       {
         label: "Quit",
+        accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Alt+f4',
         click() {
           quitApp();
         },
@@ -107,7 +108,7 @@ app.on("ready", createWindow);
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
-    app.quit();
+   quitApp();
   }
 });
 
@@ -118,6 +119,15 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+app.on('quit', () => {
+  quitApp();
+});
+
+powerMonitor.on('shutdown', () => {
+  quitApp();
+});
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
@@ -136,6 +146,10 @@ ipcMain.handle("get-settings", async () => {
   console.log("Get settings");
   return settings;
 });
+
+ipcMain.on("quitApp", function() {
+  quitApp();
+ });
 
 expressHandler(settings);
 

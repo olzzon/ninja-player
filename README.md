@@ -47,4 +47,27 @@ There's a build in webserver that serves a webpage with links to the videostream
 <img src='./docs/getlinkpage.png' width='600px' />
 
 
+### Mac OS X - setup:
+
+## Cron job that runs forcequit.sh at 4am
+```
+export EDITOR=nano
+sudo crontab -e
+```
+Add this line:
+```
+0 4 * * * /bin/bash /path/to/file/forcequit.sh >/tmp/stdout.log 2>/tmp/stderr.log
+```
+(There's an example /docs/example scripts/forcequit.sh file in the repo)
+
+To prevent apps from reopening after reboot, run this command:
+```
+defaults write -g ApplePersistence -bool no
+```
+
+
+## Auto start of Ninja Player at boot - delayed 30 sec (For webCam to load first)
+Use the example in /docs/example scripts/delay-start.ninja.scpt
+
+
 
