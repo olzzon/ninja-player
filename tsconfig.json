@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true,
     "module": "commonjs",
     "skipLibCheck": true,
     "esModuleInterop": true,

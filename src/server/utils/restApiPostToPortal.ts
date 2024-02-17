@@ -4,14 +4,13 @@ import { post } from "request";
 
 export const restApiPostToPortal = (settings: ISettings) => {
   const options = {
-    url: settings.portalUrl,
     json: true,
     body: {
       id: settings.id,
       link: createAllURLs(settings),
     },
   };
-  post(options, (error, response) => {
+  post(settings.portalUrl || "", options, (error, response) => {
     if (error) {
       console.error(error);
       return;

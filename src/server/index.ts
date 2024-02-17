@@ -22,7 +22,7 @@ export const restartApp = () => {
   console.log("Restarting Ninja-player");
   setTimeout(() => {
     app.relaunch();
-    mainWindow.destroy();
+    mainWindow?.destroy();
     app.exit(0);
   }, 1000);
 };
@@ -30,7 +30,7 @@ export const restartApp = () => {
 export const quitApp = () => {
   console.log("Quiting Ninja-player");
   setTimeout(() => {
-    mainWindow.destroy();
+    mainWindow?.destroy();
     app.exit(0);
   }, 1000);
 };

@@ -45,9 +45,9 @@
         }
       ],
       "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
+        {
+          "name": "@electron-forge/plugin-webpack",
+          "config": {
             "mainConfig": "./webpack.main.config.js",
             "renderer": {
               "config": "./webpack.renderer.config.js",
@@ -63,7 +63,7 @@
               ]
             }
           }
-        ]
+        }
       ]
     }
   },
@@ -80,6 +80,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "@vercel/webpack-asset-relocator-loader": "1.7.3",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.10.0",
     "electron": "28.2.3",
     "eslint": "^8.56.0",
@@ -90,7 +91,8 @@
     "react-dom": "^18.2.0",
     "style-loader": "^3.3.4",
     "ts-loader": "^9.5.1",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
