@@ -1,3 +1,5 @@
+## Looking for sponsors for this project
+
 # Ninja Player
 A tool for ingesting video into VDO.Ninja
 
